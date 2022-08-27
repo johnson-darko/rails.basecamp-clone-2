@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_08_27_115634) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -51,9 +54,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_27_115634) do
 
   create_table "messages", force: :cascade do |t|
     t.string "message_id"
-    t.integer "user_id", null: false
-    t.integer "project_id", null: false
-    t.integer "project_thread_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "project_id", null: false
+    t.bigint "project_thread_id", null: false
     t.text "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -71,8 +74,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_27_115634) do
   create_table "project_threads", force: :cascade do |t|
     t.string "thread_id"
     t.string "project_thread_id"
-    t.integer "project_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "project_id", null: false
+    t.bigint "user_id", null: false
     t.string "topic"
     t.text "description"
     t.datetime "created_at", null: false
@@ -83,8 +86,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_27_115634) do
 
   create_table "project_users", force: :cascade do |t|
     t.string "project_user_id"
-    t.integer "project_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "project_id", null: false
+    t.bigint "user_id", null: false
     t.boolean "read_access", default: true
     t.boolean "write_access", default: true
     t.boolean "update_access", default: true
@@ -99,7 +102,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_27_115634) do
     t.string "title"
     t.text "description"
     t.string "projectid"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_projects_on_user_id"
@@ -108,8 +111,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_27_115634) do
   create_table "tasks", force: :cascade do |t|
     t.string "task_id"
     t.string "title"
-    t.integer "project_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "project_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_tasks_on_project_id"
