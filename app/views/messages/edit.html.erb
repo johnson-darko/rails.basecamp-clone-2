@@ -15,7 +15,7 @@
         <% end %>
     <% end %>
     <div class="message-form">
-        <%= form_for :message, url: request.fullpath, html: {class: 'login-form'} do |f| %>
+        <%= simple_form_for :message, url: request.fullpath, html: {class: 'login-form'} do |f| %>
             <%= f.text_area :message, class: 'form-control', placeholder: 'Enter Your Comment Here...' %>
                 <% if @message != nil and @message.errors.any? and @message.errors.to_h[:message].to_s != "" %>
                     <div class="alert alert-danger"><%= "Message " + @message.errors.to_h[:message].to_s %></div>

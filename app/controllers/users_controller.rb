@@ -192,7 +192,7 @@ class UsersController < ApplicationController
 
     private
         def user_params
-            params.require(:user).permit(:fullname, :email, :password)
+            params.require(:user).permit(:fullname, :email, :password, photos: [])
         end
 
         def task_params

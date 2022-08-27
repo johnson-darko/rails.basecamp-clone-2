@@ -17,6 +17,7 @@
         <%# if @user != nil and @user.errors.any? and @user.errors.to_h[:password].to_s != "" %>
             <div class="alert alert-danger"><%#= "Password " + @user.errors.to_h[:password].to_s %></div>
         <%# end %>
+        
         <%= f.submit "Sign Up", class: 'form-submit', placeholder: 'Enter Your Password' %>
     <% end %>
 </section>

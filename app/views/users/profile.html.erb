@@ -1,11 +1,19 @@
-<div class="change-padding" style="margin-top:30px">
+<div class="change-padding text-center" style="margin-top:30px">
     <div class="row">
         <%= render "links/links", :locals => {:active => 'profile'} %>
         <div class="col-md-9 bg-white right-part">
             <div class="row">
                 <div class="col-md-4 profile-column">
                     <h3 class="text-center">Profile Page</h3>
-                    <div class="user-pic"></div>
+                              <hr>
+                            
+<% @user.photos.each do |photo| %>
+  <%= cl_image_tag photo.key, height: 100, width: 100, crop: :fill, style: "border-radius: 50% " %>
+<% end %>
+
+
+<div>
+                    <!-- <div class="user-pic"></div> -->
                     <div class="text-center font-weight-bold"><i class="fa fa-user"></i>&nbsp;<%= @user[:fullname] %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                 </div>
                 <div class="col-md-8">
@@ -18,7 +26,9 @@
                             <div class="alert alert-info"><%= msg %></div>
                         <% end %>
                     <% end %>
-                    <%= form_for :user, url: profile_users_path, method: :patch, html: {class: 'login-form'} do |f| %>
+                    <div class="container text-center">
+                    <%= simple_form_for :user, url: profile_users_path, method: :patch, html: {class: 'login-form'} do |f| %>
+                      
                         <%= f.email_field :email, class: 'form-control', placeholder: 'Enter Your Email Address' %>
                             <% if @user != nil and @user.errors.any? and @user.errors.to_h[:email].to_s != "" %>
                                 <div class="alert alert-danger"><%= "Email " + @user.errors.to_h[:email].to_s %></div>
@@ -31,8 +41,16 @@
                             <% if @user != nil and @user.errors.any? and @user.errors.to_h[:password].to_s != "" %>
                                 <div class="alert alert-danger"><%= "Password " + @user.errors.to_h[:password].to_s %></div>
                             <% end %>
+
+                        <div class="container mb-2">
+                            <%= f.input :photos, as: :file, input_html: { multiple: true }%>
+
+                        </div>
                         <%= f.submit "Update Profile", class: 'form-submit' %>
+
                     <% end %>
+                     </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@
                     <div class="alert alert-info"><%= msg %></div>
                 <% end %>
             <% end %>
-            <%= form_for :project, url: projects_create_users_path, html: {class: 'login-form'} do |f| %>
+            <%= simple_form_for :project, url: projects_create_users_path, html: {class: 'login-form'} do |f| %>
                 <%= f.text_field :title, class: 'form-control', placeholder: 'Enter Project Title' %>
                     <%# if @project != nil and @project.errors.any? and @project.errors.to_h[:title].to_s != "" %>
                         <!-- <div class="alert alert-danger"><#%= "Title " + @project.errors.to_h[:title].to_s %></div> -->
@@ -29,6 +29,13 @@
             <%= f.label :body %>
             <%= f.rich_text_area :body %>
         </div>
+ <div class="container mb-2">
+                            <%= f.input :photos, as: :file, input_html: { multiple: true }%>
+
+                        </div>
+
+
+        <%#= f.input :photos, as: :file, input_html: { multiple: true } %>
                 <%= f.submit "Submit Project", class: 'form-submit'%>
             <% end %>
         </div>

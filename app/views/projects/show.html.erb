@@ -13,14 +13,15 @@
   <div class="container">
           <%= @project.body %>
         </div>
+       
 <br>
-  <div class="container">
-          <%= @project.body %>
-        </div>
-<br>
-
-                    <%#= link_to "Upload Attachment Files", projects_users_path + "/attachments/create/#{@project[:projectid]}", :class => 'btn btn-sm btn-secondary' %>
-                    <%# link_to "View Project Attachments", projects_users_path + "/attachments/#{@project[:projectid]}", :class => "btn btn-sm btn-secondary" %>
+  
+          <hr>
+<% @project.photos.each do |photo| %>
+  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
+<div>
+                   
                 </div>
                 <div class="col-md-8">
                     <% flash.each do |type, msg| %>
@@ -33,7 +34,7 @@
                         <% end %>
                     <% end %>
                     <div class="row">
-                        <%# @project.attachments.each do |attachment| %>
+                        <%# @project.photos.key.each do |photo| %>
                             <%# (0..attachment.files.count-1).each do |file| %>
                                 <div class="col-md-6" style="margin-bottom:20px">
                                     <%#= attachment.files[file].inspect %>

@@ -8,5 +8,6 @@ class User < ApplicationRecord
   validates :password, presence: true, length: {minimum: 5}, on: :create
 
 
+  has_many_attached :photos, :dependent => :destroy
 
 end
